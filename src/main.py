@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from .collection.routers import router as collection_router
 
 app = FastAPI()
-
+app.include_router(collection_router)
 
 @app.get("/")
 async def read_root():
