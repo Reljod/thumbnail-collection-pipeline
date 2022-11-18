@@ -1,7 +1,6 @@
 from fastapi import APIRouter, UploadFile
 
-from ...store.collection.metadata import Metadata
-from ...store.collection import Uploader
+from ...store.collection import Uploader, Metadata
 
 router = APIRouter(prefix='/collection')
 uploader = Uploader()
