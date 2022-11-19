@@ -1,11 +1,12 @@
 from fastapi import APIRouter, UploadFile
 
-from ...store.collection import Uploader, Metadata
+from ..lib import upload
+from ...store.collection import Metadata
+
 
 router = APIRouter(prefix='/collection')
-uploader = Uploader()
 
 @router.post("/upload/", tags=["upload"])
-async def create_upload_files(files: list[UploadFile]) -> list[Metadata]:
-    metadata_list = await uploader.multiple_upload(files)
-    return metadata_list
+async def upload_multiple_files(files: list[UploadFile]) -> list[Metadata]:
+    return await upload.upload_multiple_files(files)
+
