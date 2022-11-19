@@ -5,3 +5,7 @@
 	width: 100vw;
 	padding: 1rem;
 }
+
+.loading-files-bg {
+	background-image: linear-gradient(to right, red, red 70%, transparent 70%, transparent 100%)
+}
