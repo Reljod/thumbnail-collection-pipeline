@@ -7,6 +7,7 @@ from typing import Optional
 import os
 import uuid
 
+
 class Extension(Enum):
     JPEG = 'jpg'
     PNG = 'png'
@@ -27,14 +28,14 @@ class MetadataBuilder:
     def __init__(self, file: UploadFile, ext: Extension = Extension.JPEG) -> None:
         self.file: UploadFile = file
         self.raw_filename = file.filename
-        self.basename = self._generateUuidHex()
-        self.filename = self.createFilename(ext=ext)
-        self.metadata_filename = self.createMetadataFilename()
+        self.basename = self._generate_uuid_hex()
+        self.filename = self.create_filename(ext=ext)
+        self.metadata_filename = self.create_metadata_filename()
     
-    def createFilename(self, ext: Extension = Extension.JPEG):
+    def create_filename(self, ext: Extension = Extension.JPEG):
         return f"{self.basename}.{ext.value}"
     
-    def createMetadataFilename(self):
+    def create_metadata_filename(self):
         return f"{self.basename}.json"
     
     def build(self, image_path: str) -> Metadata:
@@ -51,5 +52,5 @@ class MetadataBuilder:
             width=image.width
         )
     
-    def _generateUuidHex(self):
+    def _generate_uuid_hex(self):
         return uuid.uuid4().hex
