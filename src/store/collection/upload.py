@@ -17,21 +17,16 @@ class UploaderOptions:
 
 options = UploaderOptions()
 
-class Result(Enum):
-    FAIL = 0
-    OK = 1
-
 class Uploader:
     
     def __init__(self, options: UploaderOptions = options):
         self.base_path = options.base_path
     
-    async def upload_image(self, file: UploadFile, filename: str) -> Result:
+    async def upload_image(self, file: UploadFile, filename: str):
         img_full_path = self._get_full_path(filename)
         async with aiofiles.open(img_full_path, 'wb') as out_file:
             content = await file.read()
             await out_file.write(content)
-  
     
     async def upload_metadata(self, metadata: Metadata, filename: str):
         metadata_json = jsonable_encoder(metadata)
@@ -41,4 +36,3 @@ class Uploader:
     
     def _get_full_path(self, filename):
         return os.path.join(self.base_path, filename)
-    
